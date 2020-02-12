@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/main.css">
+    <title>Meme Editor</title>
+</head>
+<body onload="onInit()">
+    <header class="main-header">
+        <h1 class="main-title">Meme Editor</h1>
+    </header>
+<div class="main-container grid">
+        <!-- <img class="meme-img img1" onclick="onImgClicked(this)" src="img/meme/1.jpg">
+        <img class="meme-img img2" onclick="onImgClicked(this)" src="img/meme/2.jpg">
+        <img class="meme-img img3" onclick="onImgClicked(this)" src="img/meme/3.jpg"> -->
+</div>
+
+<div class="editor-container grid" style="display: none;">
+    <canvas id="my-canvas" height="450" width="450" style="border: 1px solid black;"></canvas>
+    <div class="control-box">
+        <button>switch</button>
+    </div>
+</div>
+
+
+    <script src="js/meme-service.js"></script>
+    <script src="js/meme-controller.js"></script>
+</body>
+</html>

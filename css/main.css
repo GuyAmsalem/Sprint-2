@@ -1,0 +1,28 @@
+*{
+    box-sizing: border-box;
+}
+
+/* Helpers */
+.grid{
+    display: grid;
+}
+
+
+
+.main-container{
+    grid-template-columns: repeat(auto-fill, minmax(200px ,1fr));
+
+    grid-gap: 3px;
+}
+ .meme-img{
+    max-height: 100%;
+    width: 100%;
+    object-fit: contain;
+ }
+
+.editor-container{
+    width: 100%;
+    grid-template-rows: 1;
+    grid-template-columns: repeat(2, 1fr) ;  
+
+}
