@@ -10,16 +10,27 @@
     <header class="main-header">
         <h1 class="main-title">Meme Editor</h1>
     </header>
-<div class="main-container grid">
-        <!-- <img class="meme-img img1" onclick="onImgClicked(this)" src="img/meme/1.jpg">
-        <img class="meme-img img2" onclick="onImgClicked(this)" src="img/meme/2.jpg">
-        <img class="meme-img img3" onclick="onImgClicked(this)" src="img/meme/3.jpg"> -->
-</div>
+<div class="main-container grid"></div>
 
 <div class="editor-container grid" style="display: none;">
     <canvas id="my-canvas" height="450" width="450" style="border: 1px solid black;"></canvas>
     <div class="control-box">
-        <button>switch</button>
+        <input onkeyup="onSetText(this.value)" type="text" placeholder="Enter your Meme">
+        <input onchange="onSetStrokeColor(this.value)" type="color">
+        <input onchange="onSetFillColor(this.value)" type="color">
+        <button onclick="onSetFontSize(-1)">-</button>
+        <button onclick="onSetFontSize(1)">+</button>
+        <button onclick="onSetAlign('left')">left</button>
+        <button onclick="onSetAlign('center')">center</button>
+        <button onclick="onSetAlign('right')">right</button>
+        <a href="#" onclick="downloadCanvas(this)" download="">Download</a>
+        <select onchange="onSetFontFamily(this.value)">
+            <option value="Impact">Impact</option>
+            <option value="Arial">Arial</option>
+            <option value="Fantasy">Fantasy</option>
+        </select>
+        <input onkeyup="onAddLine(this.value)" type="text" placeholder="Add new line">
+        
     </div>
 </div>
 

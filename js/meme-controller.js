@@ -24,27 +24,70 @@ function showEditor() {
 
 function renderMeme() {
     let meme = getMemeForDisplay();
-    let lines = meme.lines;
-    let line = lines[meme.selectedLineIdx]
-    // renderMemeImg(meme.selectedImgId);
-    console.log(line.txt, line.size, line.align, line.color);
-    
-    drawText(line.txt, line.size, line.align, line.color);
-
-
-}
-function drawText(text, size, align, color , x=50, y=50) {
-    gCtx.font = `${size + 'px'} impact`
-    gCtx.textAlign = align;
-    gCtx.strokeStyle = color;
-    gCtx.fillText(text, x, y);
-
-}
-
-function renderMemeImg(imgId){
     const img = new Image();
-    img.src = `../img/meme/${imgId}.jpg`;
-    img.onload = () => gCtx.drawImage(img, 0, 0);
+    img.src = `../img/meme/${meme.selectedImgId}.jpg`;
+    let lines = meme.lines;
+    img.onload = (lines) => {
+        gCtx.drawImage(img, 0, 0);
+        lines.forEach(line => {
+            drawText(line.txt, line.size, line.align, line.strokeColor, line.fillColor, line.font, meme.selectedLineIdx)
+        });
+    }
+}
+
+function drawText(text, size, align, strokeColor, fillColor, font, selectedLineIdx ) {
+    let x = gCanvas.width / 2;
+    let y = (selectedLineIdx = 0)? 60 : (selectedLineIdx = 1)? gCanvas.heigth - 60 : gCanvas.heigth / 2;
+    gCtx.font = `${size}px ${font}`
+    gCtx.lineWidth = 1;
+    gCtx.fillStyle = fillColor;
+    gCtx.strokeStyle = strokeColor;
+    gCtx.textAlign = align;
+    gCtx.fillText(text, x, y);
+    gCtx.strokeText(text, x, y);
+}
+
+function onAddLine(txt) {
+    addLine(txt);
+    renderMeme();
+}
+
+function downloadCanvas(elLink) {
+    const data = gCanvas.toDataURL();
+    elLink.href = data;
+    elLink.download = 'My-Canvas';
+}
+
+function onSetFontFamily(fontName) {
+    console.log(fontName);
+
+    setFontFamily(fontName);
+    renderMeme();
+}
+
+function onSetFontSize(val) {
+    setFontSize(val);
+    renderMeme();
+}
+
+function onSetStrokeColor(color) {
+    setStrokeColor(color);
+    renderMeme();
+}
+
+function onSetFillColor(color) {
+    setFillColor(color);
+    renderMeme();
+}
+
+function onSetText(txt) {
+    setMemeText(txt);
+    renderMeme();
+}
+
+function onSetAlign(direction) {
+    setAlign(direction);
+    renderMeme();
 }
 
 function renderGallery() {
