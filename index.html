@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/main.css">
+    <title>Meme Editor</title>
+</head>
+
+<body onload="onInit()">
+    <header class="main-header">
+        <nav class="main-nav-container container flex space-between align-center">
+            <div class="top-nav flex space-between">
+                <div class="logo">MemeGen</div>
+                <!-- <button class="menu-btn" onclick="toggleMenu()">☰</button>   Soon-->
+            </div>
+            <ul class="main-nav flex">
+                <a onclick="hideEditor()" class="flex align-center" href="#">
+                    <li>Gallery</li>
+                </a>
+                <a class="flex align-center" href="#">
+                    <li>About</li>
+                </a>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="main-container container grid"></div>
+
+    <section class="about"></section>
+
+    <div class="editor-container container grid" style="display: none;">
+        <canvas id="my-canvas" height="450" width="450" style="border: 1px solid black;"></canvas>
+        <div class="control-box grid">
+            <input class="meme-txt" onkeyup="onSetText(this.value)" type="text" placeholder="Enter your Meme">
+            <button class="btn switch-line" onclick="onSwitchLine()"><img src="icon/switch.png"></button>
+            <button class="btn add-line" onclick="onAddLine()"><img src="icon/add.jpg"></button>
+            <button class="btn delete-line" onclick="onDeleteLine()"><img src="icon/trash.jpg"></button>
+
+            <button class="btn increase-font" onclick="onSetFontSize(1)"><img src="icon/increase_font_-_icon.jpg"></button>
+            <button class="btn decrease-font" onclick="onSetFontSize(-1)"><img src="icon/decrease_font_-_icon.jpg"></button>
+            <button class="btn left-align" onclick="onSetAlign('left')"><img src="icon/align-to-left.jpg"></button>
+            <button class="btn center-align" onclick="onSetAlign('center')"><img src="icon/center-text-alignment.jpg"></button>
+            <button class="btn right-align" onclick="onSetAlign('right')"><img src="icon/align-to-right.jpg"></button>
+            <input class="stroke-color" onchange="onSetStrokeColor(this.value)" type="color">
+            <input class="fill-color" onchange="onSetFillColor(this.value)" type="color">
+            <select class="meme-font" onchange="onSetFontFamily(this.value)">
+                <option value="Impact">Impact</option>
+                <option value="Arial">Arial</option>
+                <option value="fantasy">Fantasy</option>
+            </select>
+            <a class="download" href="#" onclick="downloadCanvas(this)" download="">Download</a>
+            <button class="btn line-up" onclick="onMoveLine(-5)">⇧</button>
+            <button class="btn line-down" onclick="onMoveLine(5)">⇩</button>
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <small>Cofferights Guy Amsalem 2020 ;)</small>
+    </footer>
+
+    <script src="js/meme-service.js"></script>
+    <script src="js/meme-controller.js"></script>
+</body>
+
+</html>
