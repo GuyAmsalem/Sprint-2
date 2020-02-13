@@ -6,8 +6,17 @@ var gMeme;
 function getMemeForDisplay() {
     return gMeme;
 }
+
 function getImgsForDisplay() {
     return gImgs;
+}
+
+function getLinesForDisplay() {
+    return gMeme.lines;
+}
+
+function getSelectedLineIdx() {
+    return gMeme.selectedLineIdx;
 }
 
 function setStrokeColor(color) {
@@ -19,6 +28,10 @@ function setFillColor(color) {
 }
 
 function setMemeText(txt) {
+    if (gMeme.lines.length === 0){
+        let imgId = gMeme.selectedImgId;
+        createMeme(imgId);
+    }
     gMeme.lines[gMeme.selectedLineIdx].txt = txt;
 }
 
@@ -27,18 +40,46 @@ function setFontSize(val) {
 }
 
 function setAlign(direction) {
-    console.log(direction);
     gMeme.lines[gMeme.selectedLineIdx].align = direction;
 }
 
-function setFontFamily(fontName) {
-    console.log(fontName);
+function setLinePos(offsetX, offsetY, lineIdx){
+    gMeme.lines[lineIdx].x = offsetX;
+    gMeme.lines[lineIdx].y = offsetY;
+}
 
+function setFontFamily(fontName) {
     gMeme.lines[gMeme.selectedLineIdx].font = fontName;
 }
 
-function addLine(txt) {
+function moveLine(val){
+    gMeme.lines[gMeme.selectedLineIdx].y += val ;
+}
+
+function deleteLine() {
+    if (gMeme.lines.length === 0) return;
+    let lineIdx = gMeme.selectedLineIdx;
+    gMeme.lines.splice(lineIdx, 1);
     gMeme.selectedLineIdx++;
+    if (gMeme.selectedLineIdx > gMeme.lines.length) {
+        gMeme.selectedLineIdx = 0;
+    }
+}
+
+function switchLine(){
+    if (gMeme.lines.length <= 1) return;
+
+    if (gMeme.selectedLineIdx === gMeme.lines.length-1){
+        gMeme.selectedLineIdx = 0;        
+    } else{
+        gMeme.selectedLineIdx++
+    }
+}
+
+function addLine(txt) {
+    if (gMeme.lines.length >  0) gMeme.selectedLineIdx++;
+    else gMeme.selectedLineIdx = 0;
+
     let line = {
         txt,
         size: 60,
@@ -50,18 +91,19 @@ function addLine(txt) {
     gMeme.lines.push(line);
 }
 
-function creareMeme(imgId) {
+function createMeme(imgId) {
     gMeme = {
         selectedImgId: imgId,
         selectedLineIdx: 0,
         lines: [{
-            txt: 'Guy Amsalem',
+            txt: 'On Building..',
             size: 60,
             font: 'impact',
             align: 'center',
             strokeColor: 'black',
             fillColor: 'white',
-            
+            x: null,
+            y: null
         }]
     }
 }
@@ -71,6 +113,18 @@ function createImgs() {
     images.push(createImg(1, ['tramp']));
     images.push(createImg(2, ['dogs']));
     images.push(createImg(3, ['dog', 'child']));
+    images.push(createImg(4, []));
+    images.push(createImg(5, []));
+    images.push(createImg(6, []));
+    images.push(createImg(7, []));
+    images.push(createImg(8, []));
+    images.push(createImg(9, []));
+    images.push(createImg(10, []));
+    images.push(createImg(11, []));
+    images.push(createImg(12, []));
+    images.push(createImg(13, []));
+    images.push(createImg(14, []));
+    images.push(createImg(15, []));
 
     return images;
 }
