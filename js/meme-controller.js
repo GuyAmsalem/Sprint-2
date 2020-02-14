@@ -38,16 +38,17 @@ function renderMeme() {
     let meme = getMemeForDisplay();
     const memeImg = new Image();
     memeImg.src = `img/meme/${meme.selectedImgId}.jpg`;
-    memeImg.height = gCanvas.height;
-    memeImg.style.objectFit = 'contain';
-    if (window.innerWidth < 960){
-        gCanvas.height = window.innerWidth - 20;
-        gCanvas.width = window.innerWidth - 20;
+    // memeImg.height = '100%';
+    // memeImg.width = gCanvas.width;
+    // memeImg.style.objectFit = 'contain';
+    if (window.innerWidth < 650){
+        gCanvas.height = window.innerWidth - 50;
+        gCanvas.width = window.innerWidth - 50;
         console.log('gCanvas.height', gCanvas.height);
         
     }
     memeImg.onload = () => {
-        gCtx.drawImage(memeImg, 0, 0);
+        gCtx.drawImage(memeImg, 0, 0, gCanvas.width, gCanvas.height);
         drawLines();
     }
 }
@@ -63,10 +64,12 @@ function drawLines(){
 
 function drawText(text, size, align, strokeColor, fillColor, font, lineIdx, offsetX, offsetY ) {
     if (!offsetX || !offsetY){
-        offsetX = gCanvas.width / 2;
         offsetY = (lineIdx === 0)? 60 : (lineIdx === 1)? gCanvas.height - 60 : gCanvas.height / 2;
-        setLinePos(offsetX, offsetY, lineIdx);
     }
+    let txtWidth = getTextWidth(font, size);
+    offsetX =  (align === 'center')? gCanvas.width / 2 : (align === 'left')? 20 : gCanvas.width - txtWidth +10;
+    setLinePos(offsetX, offsetY, lineIdx);
+
     gCtx.font = `${size}px ${font}`;
     gCtx.lineWidth = 1;
     gCtx.fillStyle = fillColor;
@@ -142,4 +145,12 @@ function renderGallery() {
     });
     var elGallery = document.querySelector('.main-container');
     elGallery.innerHTML = strHTMLS.join('');
+}
+
+function getTextWidth(text, font) {
+    let canvas = getTextWidth.canvas || (getTextWidth.canvas = document.createElement("canvas"));
+    let context = canvas.getContext("2d");
+    context.font = font;
+    var metrics = context.measureText(text);
+    return metrics.width;
 }

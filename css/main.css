@@ -223,5 +223,9 @@ ul{
     #my-canvas{
         margin: 0 auto;
     }
+    .logo{
+        padding-left: 15.5px;
+        
+    }
 }
 
