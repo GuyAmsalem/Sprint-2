@@ -19,6 +19,10 @@ function getSelectedLineIdx() {
     return gMeme.selectedLineIdx;
 }
 
+function getSelectedLineTxt() {
+    return gMeme.lines[gMeme.selectedLineIdx].txt;
+}
+
 function setStrokeColor(color) {
     gMeme.lines[gMeme.selectedLineIdx].strokeColor = color;
 }
@@ -96,7 +100,7 @@ function createMeme(imgId) {
         selectedImgId: imgId,
         selectedLineIdx: 0,
         lines: [{
-            txt: 'On Building..',
+            txt: 'Enter some text',
             size: 60,
             font: 'impact',
             align: 'center',

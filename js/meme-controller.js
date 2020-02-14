@@ -7,11 +7,9 @@ function onInit() {
     renderGallery();
     gCanvas = document.getElementById('my-canvas');
     gCtx = gCanvas.getContext('2d');
-    window.addEventListener('resize', function(){
-        if (window.innerWidth > 960) return;
-        gCanvas.width = window.innerWidth / 2;
-        gCanvas.height = window.innerWidth / 2;
-    });
+    if (window.innerWidth > 960) return;
+    gCanvas.width = window.innerWidth / 2;
+    gCanvas.height = window.innerWidth / 2;
 }
 
 function onImgClicked(imgId) {
@@ -38,14 +36,11 @@ function renderMeme() {
     let meme = getMemeForDisplay();
     const memeImg = new Image();
     memeImg.src = `img/meme/${meme.selectedImgId}.jpg`;
-    // memeImg.height = '100%';
-    // memeImg.width = gCanvas.width;
-    // memeImg.style.objectFit = 'contain';
-    if (window.innerWidth < 650){
+    if (window.innerWidth < 650) {
         gCanvas.height = window.innerWidth - 50;
         gCanvas.width = window.innerWidth - 50;
         console.log('gCanvas.height', gCanvas.height);
-        
+
     }
     memeImg.onload = () => {
         gCtx.drawImage(memeImg, 0, 0, gCanvas.width, gCanvas.height);
@@ -53,21 +48,21 @@ function renderMeme() {
     }
 }
 
-function drawLines(){
+function drawLines() {
     let lines = getLinesForDisplay();
     let selectedLineIdx = getSelectedLineIdx();
-        lines.forEach((line,idx) => {            
-            drawText(line.txt, line.size, line.align, line.strokeColor,
-                 line.fillColor, line.font,idx, line.x, line.y) ;
-        });
+    lines.forEach((line, idx) => {
+        drawText(line.txt, line.size, line.align, line.strokeColor,
+            line.fillColor, line.font, idx, line.x, line.y);
+    });
 }
 
-function drawText(text, size, align, strokeColor, fillColor, font, lineIdx, offsetX, offsetY ) {
-    if (!offsetX || !offsetY){
-        offsetY = (lineIdx === 0)? 60 : (lineIdx === 1)? gCanvas.height - 60 : gCanvas.height / 2;
+function drawText(text, size, align, strokeColor, fillColor, font, lineIdx, offsetX, offsetY) {
+    if (!offsetX || !offsetY) {
+        offsetY = (lineIdx === 0) ? 60 : (lineIdx === 1) ? gCanvas.height - 60 : gCanvas.height / 2;
     }
     let txtWidth = getTextWidth(font, size);
-    offsetX =  (align === 'center')? gCanvas.width / 2 : (align === 'left')? 20 : gCanvas.width - txtWidth +10;
+    offsetX = (align === 'center') ? gCanvas.width / 2 : (align === 'left') ? 20 : gCanvas.width - txtWidth + 10;
     setLinePos(offsetX, offsetY, lineIdx);
 
     gCtx.font = `${size}px ${font}`;
@@ -79,17 +74,24 @@ function drawText(text, size, align, strokeColor, fillColor, font, lineIdx, offs
     gCtx.strokeText(text, offsetX, offsetY);
 }
 
-function onSwitchLine(){
+function resetInputLine() {
+    let elInput = document.querySelector('.meme-txt');
+    let lineTxt = getSelectedLineTxt();
+    elInput.value = (lineTxt === 'New Line') ? '' : lineTxt;
+}
+
+function onSwitchLine() {
     switchLine();
+    resetInputLine();
     renderMeme();
 }
 
-function onMoveLine(val){
+function onMoveLine(val) {
     moveLine(val);
     renderMeme();
 }
 
-function onDeleteLine(){
+function onDeleteLine() {
     deleteLine();
     renderMeme();
 }
@@ -97,6 +99,7 @@ function onDeleteLine(){
 function onAddLine() {
     let lineTxt = 'New Line';
     addLine(lineTxt);
+    resetInputLine();
     renderMeme();
 }
 
