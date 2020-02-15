@@ -43,16 +43,25 @@
             <button class="btn left-align" onclick="onSetAlign('left')"><img src="icon/align-to-left.jpg"></button>
             <button class="btn center-align" onclick="onSetAlign('center')"><img src="icon/center-text-alignment.jpg"></button>
             <button class="btn right-align" onclick="onSetAlign('right')"><img src="icon/align-to-right.jpg"></button>
-            <input class="stroke-color" onchange="onSetStrokeColor(this.value)" type="color">
-            <input class="fill-color" onchange="onSetFillColor(this.value)" type="color">
             <select class="meme-font" onchange="onSetFontFamily(this.value)">
                 <option value="Impact">Impact</option>
                 <option value="Arial">Arial</option>
                 <option value="monospace">Monospace</option>
             </select>
-
             
-            <a class="download" href="#" onclick="downloadCanvas(this)" download="">Download</a>
+            <button class="btn stroke-btn" onclick="clickOnStroke()">
+                <img class="stroke-img" src="icon/stroke.jpg" alt="">
+                <input class="stroke-color" onchange="onSetStrokeColor(this.value)" type="color" >
+            </button>
+            <button class="btn fill-btn" onclick="clickOnFill()">
+                <img class="fill-img" src="icon/fill.jpg">
+                <input class="fill-color" onchange="onSetFillColor(this.value)" type="color">
+            </button>
+            
+            <button class="download-btn" onclick="clickOnDownload()">
+                Download
+                <a class="download-link" href="#" onclick="downloadCanvas(this)" download=""></a>
+            </button>
             <button class="btn line-up" onclick="onMoveLine(-10)">⇧</button>
             <button class="btn line-down" onclick="onMoveLine(10)">⇩</button>
         </div>

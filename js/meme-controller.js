@@ -45,8 +45,29 @@ function renderMeme() {
     memeImg.onload = () => {
         gCtx.drawImage(memeImg, 0, 0, gCanvas.width, gCanvas.height);
         drawLines();
+        drawFocusRect();
     }
 }
+
+// function drawFocusRect(){
+//     let line = getSelectedLine();
+//     let txtWidth = getTextWidth(line.txt, `${line.size}px ${line.font}` );
+//     console.log(txtWidth);
+//     let yStart = line.y - line.size +5;
+//     let xStart;
+//     if (line.align === 'right'){
+//         xStart = line.x - 5;  
+//     } else if (line.align === 'center'){
+//         xStart = line.x - (txtWidth / 2) -5;
+//     } else {
+//         xStart = gCanvas.width - txtWidth -5
+//     }
+//     let width = txtWidth + 10;
+//     let height = line.size + 5;
+//     gCtx.rect(xStart, yStart, width, height);
+//     gCtx.strokeStyle = 'black';
+//     gCtx.stroke() ;
+// }
 
 function drawLines() {
     let lines = getLinesForDisplay();
@@ -72,12 +93,14 @@ function drawText(text, size, align, strokeColor, fillColor, font, lineIdx, offs
     gCtx.textAlign = align;
     gCtx.fillText(text, offsetX, offsetY);
     gCtx.strokeText(text, offsetX, offsetY);
+    console.log('offsetX', offsetX, 'offsetY ',offsetY);
+    
 }
 
 function resetInputLine() {
     let elInput = document.querySelector('.meme-txt');
     let lineTxt = getSelectedLineTxt();
-    elInput.value = (lineTxt === 'New Line') ? '' : lineTxt;
+    elInput.value = (lineTxt === 'New Line' || lineTxt === 'Enter some text' ) ? '' : lineTxt;
 }
 
 function onSwitchLine() {
@@ -103,6 +126,10 @@ function onAddLine() {
     renderMeme();
 }
 
+function clickOnDownload(){
+    document.querySelector('.download-link').click();
+}
+
 function downloadCanvas(elLink) {
     const data = gCanvas.toDataURL();
     elLink.href = data;
@@ -119,9 +146,17 @@ function onSetFontSize(val) {
     renderMeme();
 }
 
+function clickOnStroke(){
+    document.querySelector('.stroke-color').click();
+}
+
 function onSetStrokeColor(color) {
     setStrokeColor(color);
     renderMeme();
+}
+
+function clickOnFill(){
+    document.querySelector('.fill-color').click();
 }
 
 function onSetFillColor(color) {
@@ -151,8 +186,8 @@ function renderGallery() {
 }
 
 function getTextWidth(text, font) {
-    let canvas = getTextWidth.canvas || (getTextWidth.canvas = document.createElement("canvas"));
-    let context = canvas.getContext("2d");
+    let canvas = getTextWidth.canvas || (getTextWidth.canvas = document.createElement('canvas'));
+    let context = canvas.getContext('2d');
     context.font = font;
     var metrics = context.measureText(text);
     return metrics.width;

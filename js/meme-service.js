@@ -18,7 +18,9 @@ function getLinesForDisplay() {
 function getSelectedLineIdx() {
     return gMeme.selectedLineIdx;
 }
-
+function getSelectedLine(){
+    return gMeme.lines[gMeme.selectedLineIdx]; 
+}
 function getSelectedLineTxt() {
     return gMeme.lines[gMeme.selectedLineIdx].txt;
 }

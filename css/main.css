@@ -117,7 +117,11 @@ ul{
     border-radius: 12px;
     font-family: Montserrat;
     border: none;
-    max-width: 23.375rem;
+}
+
+.control-box >*:hover {
+    border: 1px solid #ff7f00;
+    cursor: pointer;
 }
 
 .control-box >*.btn{
@@ -171,20 +175,35 @@ ul{
 .right-align{
     grid-area: 3 / 5 / 4 / 6;
 }
+.stroke-btn{
+    grid-area: 4 / 4 / 5 / 5;   
+}
+.stroke-img{
+    width: 50px;
+    height: 45px;
+}
 .stroke-color{
-    grid-area: 4 / 4 / 5 / 5;
-    width: 60px;
-    height: 60px;
+    display: none;
+}
+.fill-btn{
+    grid-area: 4 / 5 / 5 / 6;
+}
+.fill-img{
+    width: 45px;
+    height: 45px;
 }
 .fill-color{
-    grid-area: 4 / 5 / 5 / 6;
-    width: 60px;
-    height: 60px;
+    display: none;
 }
-.download{
+.download-btn{
     grid-area: 5 / 4 / 6 / 6;
-    width: 60px;
     height: 60px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 1.25rem;
+}
+
+.download-link{
+    display: none;
 }
 
 .line-up{
@@ -225,6 +244,7 @@ ul{
     }
     .logo{
         padding-left: 15.5px;
+        
         
     }
 }
