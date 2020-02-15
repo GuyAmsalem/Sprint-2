@@ -39,13 +39,10 @@ function renderMeme() {
     if (window.innerWidth < 650) {
         gCanvas.height = window.innerWidth - 50;
         gCanvas.width = window.innerWidth - 50;
-        console.log('gCanvas.height', gCanvas.height);
-
     }
     memeImg.onload = () => {
         gCtx.drawImage(memeImg, 0, 0, gCanvas.width, gCanvas.height);
         drawLines();
-        drawFocusRect();
     }
 }
 
